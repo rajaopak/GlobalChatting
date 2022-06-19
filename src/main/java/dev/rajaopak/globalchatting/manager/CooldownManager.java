@@ -1,5 +1,7 @@
 package dev.rajaopak.globalchatting.manager;
 
+import net.md_5.bungee.api.ProxyServer;
+
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -23,11 +25,15 @@ public class CooldownManager {
     }
 
     public boolean isCooldown(UUID uuid) {
-        if (cooldowns.containsKey(uuid)) {
-            if (cooldowns.get(uuid) > System.currentTimeMillis()) {
-                return true;
+        if (!ProxyServer.getInstance().getPlayer(uuid).hasPermission("globalchatting.bypass-cooldown")){
+            if (cooldowns.containsKey(uuid)) {
+                if (cooldowns.get(uuid) > System.currentTimeMillis()) {
+                    return true;
+                } else {
+                    removeCooldown(uuid);
+                    return false;
+                }
             } else {
-                removeCooldown(uuid);
                 return false;
             }
         } else {

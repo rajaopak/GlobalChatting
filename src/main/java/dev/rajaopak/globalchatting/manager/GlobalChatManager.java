@@ -67,6 +67,7 @@ public class GlobalChatManager {
 
     public static String formatPlaceholder(ProxiedPlayer player, String format, String message) {
         return format.replace("{player}", player.getName()).replace("{message}", message)
+                .replace("{server}", player.getServer().getInfo().getName())
                 .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
                 .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
     }
