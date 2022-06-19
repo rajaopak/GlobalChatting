@@ -1,6 +1,7 @@
 #GlobalChatting Configuration.
 
 #mute the global chat so no one can talk. (only the player that has the permission can talk)
+#Permission to bypass mute: globalchatting.bypass-muted
 is-muted: false
 
 globalchat:
