@@ -30,7 +30,6 @@ public final class GlobalChatting extends Plugin {
     public void onDisable() {
         // Plugin shutdown logic
         getCooldownManager().clearCooldowns();
-        getConfigManager().saveConfig();
     }
 
     public static ConfigManager getConfigManager() {

@@ -1,16 +1,16 @@
 package dev.rajaopak.globalchatting.config;
 
 import dev.rajaopak.globalchatting.GlobalChatting;
-import dev.rajaopak.globalchatting.util.Common;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,18 +67,6 @@ public class ConfigManager {
             plugin.getLogger().severe("Cannot load the Config!");
             e.printStackTrace();
         }
-
-        if (configFile.isFile() && !configFile.exists()) {
-            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(configFile))) {
-                for (String line : defaultConfig) {
-                    bufferedWriter.write(line);
-                    bufferedWriter.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
     public void loadConfig() throws IOException {
@@ -89,7 +77,8 @@ public class ConfigManager {
         }
 
         if (!configFile.exists()) {
-            configFile.createNewFile();
+            InputStream in = plugin.getResourceAsStream("config.yml");
+            Files.copy(in, configFile.toPath());
         }
 
         configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
