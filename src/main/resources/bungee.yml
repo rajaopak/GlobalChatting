@@ -2,3 +2,4 @@ name: GlobalChatting
 version: '${version}'
 main: dev.rajaopak.globalchatting.GlobalChatting
 description: Plugin For Chatting In BungeeCord
+author: rajaopak

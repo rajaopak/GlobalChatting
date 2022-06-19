@@ -5,13 +5,12 @@ version = '0.1'
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'sonatype'
-        url = 'https://oss.sonatype.org/content/groups/public/'
-    }
+    maven { url ("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+    maven { url ("https://oss.sonatype.org/content/repositories/snapshots/") }
 }
 
 dependencies {
+    implementation 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
 }
 
@@ -28,6 +27,12 @@ java {
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
+    }
+}
+
+tasks {
+    compileJava {
+        options.encoding = "UTF-8"
     }
 }
 
