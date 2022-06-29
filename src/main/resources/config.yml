@@ -16,9 +16,13 @@ globalchat:
     #if format is empty, it will use the default format of plugin has.
     format: "&8[&7{date}, {time}&8] &8[&aGlobal&8] &r{player}&7: &r{message}"
 
-    #this settings make you whether use color or not.
+    #this settings make you whether you use color or not.
     #if you leave this empty or not set this, it will return false.
     useColor: false
+
+    #this settings make you whether you use hex color or not (if you enable this, useColor will turn to true).
+    #if you leave this empty or not set this, it will return false.
+    useHexColor: false
 
     #this setting will determine which one will be selected first.
     #the higher number will be chosen first.
@@ -33,5 +37,6 @@ globalchat:
     permission: "globalchatting.staff"
     format: "&8[&7{date}, {time}&8] &8[&aGlobal&8] &8[&bStaff&8] &r{player}&7: &r{message}"
     useColor: true
+    useHexColor: true
     priority: 5
     cooldown: 0

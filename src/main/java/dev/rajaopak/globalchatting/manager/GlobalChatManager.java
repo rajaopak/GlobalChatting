@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 
-import static dev.rajaopak.globalchatting.util.Common.color;
+import static dev.rajaopak.globalchatting.util.Common.*;
 
 public class GlobalChatManager {
 
@@ -38,6 +38,7 @@ public class GlobalChatManager {
         String finalPerm = GlobalChatting.getConfigManager().getConfiguration().getString("globalchat." + finalKey + ".permission");
         String finalFormat = GlobalChatting.getConfigManager().getConfiguration().getString("globalchat." + finalKey + ".format");
         boolean finalUseColor = GlobalChatting.getConfigManager().getConfiguration().getBoolean("globalchat." + finalKey + ".useColor");
+        boolean finalUseHexColor = GlobalChatting.getConfigManager().getConfiguration().getBoolean("globalchat." + finalKey + ".useHexColor");
         int finalCooldown = GlobalChatting.getConfigManager().getConfiguration().getInt("globalchat." + finalKey + ".cooldown");
 
         if (finalFormat == null || finalFormat.isEmpty()) {
@@ -56,12 +57,26 @@ public class GlobalChatManager {
 
         if (finalUseColor) {
             String finalFormat1 = finalFormat;
-            ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(color(new TextComponent(formatPlaceholder(player, finalFormat1, message)))));
-            Common.log(color(new TextComponent(formatPlaceholder(player, finalFormat, message))).getText());
+            if (finalUseHexColor) {
+                System.out.println("Using Hex Color");
+                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, color(finalFormat1), translateHexColor(message))));
+                Common.log(formatPlaceholder(player, color(finalFormat), translateHexColor(message)));
+            } else {
+                System.out.println("Using Color");
+                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(color(new TextComponent(formatPlaceholder(player, finalFormat1, message)))));
+                Common.log(color(new TextComponent(formatPlaceholder(player, finalFormat, message))).getText());
+            }
         } else {
             String finalFormat2 = finalFormat;
-            ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(new TextComponent(formatPlaceholder(player, color(finalFormat2), ChatColor.stripColor(message)))));
-            Common.log(formatPlaceholder(player, color(finalFormat), ChatColor.stripColor(message)));
+            if (finalUseHexColor) {
+                System.out.println("Using Hex Color 2");
+                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, color(finalFormat2), translateHexColor(ChatColor.stripColor(message)))));
+                Common.log(formatPlaceholder(player, color(finalFormat), translateHexColor(ChatColor.stripColor(message))));
+            } else {
+                System.out.println("Using Color 2");
+                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(new TextComponent(formatPlaceholder(player, color(finalFormat2), ChatColor.stripColor(message)))));
+                Common.log(formatPlaceholder(player, color(finalFormat), ChatColor.stripColor(message)));
+            }
         }
     }
 

@@ -7,11 +7,14 @@ repositories {
     mavenCentral()
     maven { url ("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
     maven { url ("https://oss.sonatype.org/content/repositories/snapshots/") }
+    maven { url ("https://jitpack.io") }
 }
 
 dependencies {
     implementation 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
+    implementation 'com.gitlab.ruany:LiteBansAPI:0.3.5'
+    compileOnly files('lib/AdvancedBan.jar')
 }
 
 def targetJavaVersion = 8
