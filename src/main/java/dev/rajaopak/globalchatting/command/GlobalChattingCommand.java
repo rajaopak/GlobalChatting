@@ -5,6 +5,7 @@ import dev.rajaopak.globalchatting.hooks.HookManager;
 import dev.rajaopak.globalchatting.manager.GlobalChatManager;
 import dev.rajaopak.globalchatting.util.Common;
 import litebans.api.Database;
+import me.leoko.advancedban.manager.PunishmentManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -36,10 +37,10 @@ public class GlobalChattingCommand extends Command {
             return;
         }
 
-        /*if (HookManager.isAdvancedBanEnable() && PunishmentManager.get().isMuted(player.getUniqueId().toString())) {
+        if (HookManager.isAdvancedBanEnable() && PunishmentManager.get().isMuted(player.getUniqueId().toString().replace("-", ""))) {
             sender.sendMessage(color(new TextComponent("&cYou are currently muted!")));
             return;
-        }*/
+        }
 
         if (GlobalChatting.getCooldownManager().isCooldown(player.getUniqueId())) {
             sender.sendMessage(color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chatting again!")));

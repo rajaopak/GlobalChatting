@@ -8,8 +8,8 @@ public class HookManager {
         return ProxyServer.getInstance().getPluginManager().getPlugin("LiteBans") != null;
     }
 
-    /*public static boolean isAdvancedBanEnable() {
+    public static boolean isAdvancedBanEnable() {
         return ProxyServer.getInstance().getPluginManager().getPlugin("AdvancedBan") != null;
-    }*/
+    }
 
 }
