@@ -7,8 +7,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.md_5.bungee.api.ChatColor.COLOR_CHAR;
-
 public class Common {
 
     public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");

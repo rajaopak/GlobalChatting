@@ -5,8 +5,6 @@ import dev.rajaopak.globalchatting.hooks.HookManager;
 import dev.rajaopak.globalchatting.manager.GlobalChatManager;
 import dev.rajaopak.globalchatting.util.Common;
 import litebans.api.Database;
-import litebans.api.Entry;
-import me.leoko.advancedban.manager.PunishmentManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
