@@ -1,11 +1,10 @@
 package dev.rajaopak.globalchatting.command;
 
 import dev.rajaopak.globalchatting.GlobalChatting;
+import dev.rajaopak.globalchatting.util.Common;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
-
-import static dev.rajaopak.globalchatting.util.Common.color;
 
 public class ReloadCommand extends Command {
 
@@ -16,17 +15,17 @@ public class ReloadCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!sender.hasPermission(getPermission())) {
-            sender.sendMessage(color(new TextComponent("&cYou don't have permission to use this command!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou don't have permission to use this command!")));
             return;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(color(new TextComponent("&cReloading the configuration...")));
+            sender.sendMessage(Common.color(new TextComponent("&cReloading the configuration...")));
             GlobalChatting.getConfigManager().reloadConfig();
-            sender.sendMessage(color(new TextComponent("&aConfiguration reloaded!")));
+            sender.sendMessage(Common.color(new TextComponent("&aConfiguration reloaded!")));
         } else {
-            sender.sendMessage(color(new TextComponent("&cUsage: /globalchattingreload")));
-            sender.sendMessage(color(new TextComponent("&6Aliases: /gcreload, /gchatreload")));
+            sender.sendMessage(Common.color(new TextComponent("&cUsage: /globalchattingreload")));
+            sender.sendMessage(Common.color(new TextComponent("&6Aliases: /gcreload, /gchatreload")));
         }
     }
 }

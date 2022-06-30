@@ -4,7 +4,6 @@ import dev.rajaopak.globalchatting.command.GlobalChatMuteCommand;
 import dev.rajaopak.globalchatting.command.GlobalChattingCommand;
 import dev.rajaopak.globalchatting.command.ReloadCommand;
 import dev.rajaopak.globalchatting.config.ConfigManager;
-import dev.rajaopak.globalchatting.hooks.HookManager;
 import dev.rajaopak.globalchatting.manager.CooldownManager;
 import dev.rajaopak.globalchatting.metrics.Metrics;
 import net.md_5.bungee.api.plugin.Plugin;

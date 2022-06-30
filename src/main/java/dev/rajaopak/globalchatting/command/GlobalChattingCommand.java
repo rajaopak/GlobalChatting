@@ -11,8 +11,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-import static dev.rajaopak.globalchatting.util.Common.color;
-
 public class GlobalChattingCommand extends Command {
 
     public GlobalChattingCommand() {
@@ -22,33 +20,33 @@ public class GlobalChattingCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
-            sender.sendMessage(color(new TextComponent("&cYou need to be a player to use this command!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou need to be a player to use this command!")));
             return;
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
         if (GlobalChatting.getConfigManager().isMuted()) {
-            sender.sendMessage(color(new TextComponent("&cGlobalChatting is currently muted!")));
+            sender.sendMessage(Common.color(new TextComponent("&cGlobalChatting is currently muted!")));
             return;
         }
 
         if (HookManager.isLiteBansEnable() && Database.get().isPlayerMuted(player.getUniqueId(), player.getAddress().getHostName())) {
-            sender.sendMessage(color(new TextComponent("&cYou are currently muted!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou are currently muted!")));
             return;
         }
 
         if (HookManager.isAdvancedBanEnable() && PunishmentManager.get().isMuted(player.getUniqueId().toString().replace("-", ""))) {
-            sender.sendMessage(color(new TextComponent("&cYou are currently muted!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou are currently muted!")));
             return;
         }
 
         if (GlobalChatting.getCooldownManager().isCooldown(player.getUniqueId())) {
-            sender.sendMessage(color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chatting again!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chatting again!")));
             return;
         }
 
         if (GlobalChatting.getConfigManager().isMuted() && !sender.hasPermission("globalchatting.bypass-muted")) {
-            sender.sendMessage(color(new TextComponent("&cGlobalChatting is currently muted!")));
+            sender.sendMessage(Common.color(new TextComponent("&cGlobalChatting is currently muted!")));
             return;
         }
 
@@ -72,7 +70,7 @@ public class GlobalChattingCommand extends Command {
     }
 
     public void sendHelp(CommandSender sender) {
-        sender.sendMessage(color(new TextComponent("&cUsage: /globalchatting <message>")));
-        sender.sendMessage(color(new TextComponent("&6Aliases: /gc, /globalchat, /gchat")));
+        sender.sendMessage(Common.color(new TextComponent("&cUsage: /globalchatting <message>")));
+        sender.sendMessage(Common.color(new TextComponent("&6Aliases: /gc, /globalchat, /gchat")));
     }
 }
