@@ -4,6 +4,8 @@ import dev.rajaopak.globalchatting.command.GlobalChatMuteCommand;
 import dev.rajaopak.globalchatting.command.GlobalChattingCommand;
 import dev.rajaopak.globalchatting.command.ReloadCommand;
 import dev.rajaopak.globalchatting.config.ConfigManager;
+import dev.rajaopak.globalchatting.hooks.HookManager;
+import dev.rajaopak.globalchatting.listener.LuckPermsListener;
 import dev.rajaopak.globalchatting.manager.CooldownManager;
 import dev.rajaopak.globalchatting.metrics.Metrics;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -18,6 +20,10 @@ public final class GlobalChatting extends Plugin {
         // Plugin startup logic
         configManager = new ConfigManager(this);
         cooldownManager = new CooldownManager();
+
+        if (HookManager.isLuckPermsEnable()) {
+            new LuckPermsListener(this);
+        }
 
         this.getProxy().getPluginManager().registerCommand(this, new GlobalChattingCommand());
         this.getProxy().getPluginManager().registerCommand(this, new GlobalChatMuteCommand());

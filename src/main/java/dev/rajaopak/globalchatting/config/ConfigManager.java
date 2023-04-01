@@ -15,10 +15,7 @@ import java.util.List;
 
 public class ConfigManager {
 
-    private GlobalChatting plugin;
-    private File configFile;
-    private Configuration configuration;
-
+    private final GlobalChatting plugin;
     private final List<String> defaultConfig = Arrays.asList(
             "#GlobalChatting Configuration.",
             " ",
@@ -33,9 +30,9 @@ public class ConfigManager {
             "    permission: \"globalchatting.default\"",
             " ",
             "    #this is the format of the message that will be sent to the global chat.",
-            "    #placeholder: {player}, {message}, {time}, {date}.",
+            "    #placeholder: {player}, {server}, {message}, {time}, {date}.",
             "    #if format is empty, it will use the default format of plugin has.",
-            "    format: \"&8[&7{date}, {time}&8] &8[&aGlobal&8] &r{player}&7: &r{message}\"",
+            "    format: \"&8[&7{date}, {time}&8] &8[&aGlobal&8] &8[&e{server}&8] &r{player}&7: &r{message}\"",
             " ",
             "    #this settings make you whether use color or not.",
             "    #if you leave this empty or not set this, it will return false.",
@@ -52,10 +49,12 @@ public class ConfigManager {
             " ",
             "  staff:",
             "    permission: \"globalchatting.staff\"",
-            "    format: \"&8[&7{date}, {time}&8] &8[&aGlobal&8] &8[&bStaff&8] &r{player}&7: &r{message}\"",
+            "    format: \"&8[&7{date}, {time}&8] &8[&aGlobal&8] &8[&e{server}&8] &8[&bStaff&8] &r{player}&7: &r{message}\"",
             "    useColor: true",
             "    priority: 5",
             "    cooldown: 0");
+    private File configFile;
+    private Configuration configuration;
 
     public ConfigManager(GlobalChatting plugin) {
         this.plugin = plugin;

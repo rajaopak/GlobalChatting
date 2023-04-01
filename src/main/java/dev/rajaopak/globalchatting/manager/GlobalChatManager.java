@@ -57,7 +57,7 @@ public class GlobalChatManager {
             String finalFormat1 = finalFormat;
             if (finalUseHexColor) {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat1), Common.translateHexColor(message))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(message)));
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(message)).getText());
             } else {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat1), message)));
                 Common.log(Common.color(new TextComponent(formatPlaceholder(player, finalFormat, message))).getText());
@@ -66,19 +66,19 @@ public class GlobalChatManager {
             String finalFormat2 = finalFormat;
             if (finalUseHexColor) {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat2), Common.translateHexColor(ChatColor.stripColor(message)))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(ChatColor.stripColor(message))));
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(ChatColor.stripColor(message))).getText());
             } else {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat2), ChatColor.stripColor(message))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), ChatColor.stripColor(message)));
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), ChatColor.stripColor(message)).getText());
             }
         }
     }
 
-    public static String formatPlaceholder(ProxiedPlayer player, String format, String message) {
-        return format.replace("{player}", player.getName()).replace("{message}", message)
+    public static TextComponent formatPlaceholder(ProxiedPlayer player, String format, String message) {
+        return new TextComponent(format.replace("{player}", player.getName()).replace("{message}", message)
                 .replace("{server}", player.getServer().getInfo().getName())
                 .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
-                .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
+                .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now())));
     }
 
 }

@@ -25,7 +25,7 @@ public class CooldownManager {
     }
 
     public boolean isCooldown(UUID uuid) {
-        if (!ProxyServer.getInstance().getPlayer(uuid).hasPermission("globalchatting.bypass-cooldown")){
+        if (!ProxyServer.getInstance().getPlayer(uuid).hasPermission("globalchatting.bypass-cooldown")) {
             if (cooldowns.containsKey(uuid)) {
                 if (cooldowns.get(uuid) > System.currentTimeMillis()) {
                     return true;

@@ -10,18 +10,23 @@ import java.util.regex.Pattern;
 public class Common {
 
     public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");
+    public static final char COLOR_CHAR = '\u00A7';
 
     public static String translateHexColor(String string) {
 
         Matcher matcher = HEX_PATTERN.matcher(string);
         StringBuffer buffer = new StringBuffer();
 
-        while(matcher.find()) {
-            matcher.appendReplacement(buffer, ChatColor.of("#" + matcher.group(1)).toString());
+        while (matcher.find()) {
+            String group = matcher.group(1);
+            matcher.appendReplacement(buffer, COLOR_CHAR + "x"
+                    + COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1)
+                    + COLOR_CHAR + group.charAt(2) + COLOR_CHAR + group.charAt(3)
+                    + COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5)
+            );
         }
 
         return ChatColor.translateAlternateColorCodes('&', matcher.appendTail(buffer).toString());
-
     }
 
     public static String color(String s) {

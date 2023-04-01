@@ -10,11 +10,20 @@ repositories {
     maven { url ("https://jitpack.io") }
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'junit:junit:4.13.1'
+
     compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
-    implementation 'com.gitlab.ruany:LiteBansAPI:0.3.5'
+    compileOnly 'net.luckperms:api:5.4'
     compileOnly files('lib/AdvancedBan.jar')
+
+    implementation 'com.gitlab.ruany:LiteBansAPI:0.3.5'
 }
 
 def targetJavaVersion = 8

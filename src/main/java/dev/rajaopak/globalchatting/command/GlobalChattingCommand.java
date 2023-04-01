@@ -30,6 +30,11 @@ public class GlobalChattingCommand extends Command {
             return;
         }
 
+        if (HookManager.isLuckPermsEnable()) {
+
+            return;
+        }
+
         if (HookManager.isLiteBansEnable() && Database.get().isPlayerMuted(player.getUniqueId(), player.getAddress().getHostName())) {
             sender.sendMessage(Common.color(new TextComponent("&cYou are currently muted!")));
             return;
