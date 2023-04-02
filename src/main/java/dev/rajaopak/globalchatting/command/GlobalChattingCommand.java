@@ -20,18 +20,29 @@ public class GlobalChattingCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
-            sender.sendMessage(Common.color(new TextComponent("&cYou need to be a player to use this command!")));
+            if (args.length == 0) {
+                sendHelp(sender);
+                return;
+            }
+
+            StringBuilder message = new StringBuilder();
+
+            for (String s : args) {
+                message.append(s).append(" ");
+            }
+            message = new StringBuilder(message.substring(0, message.length() - 1));
+
+            if (message.toString().isEmpty()) {
+                sendHelp(sender);
+            }
+
+            GlobalChatManager.sendConsoleGlobalChat(sender, message.toString());
             return;
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (GlobalChatting.getConfigManager().isMuted()) {
-            sender.sendMessage(Common.color(new TextComponent("&cGlobalChatting is currently muted!")));
-            return;
-        }
-
-        if (HookManager.isLuckPermsEnable()) {
-
+        if (GlobalChatting.getConfigManager().isMuted() && !sender.hasPermission("globalchatting.bypass-muted")) {
+            sender.sendMessage(Common.color(new TextComponent("&cGlobal Chat is currently muted!")));
             return;
         }
 
@@ -46,12 +57,7 @@ public class GlobalChattingCommand extends Command {
         }
 
         if (GlobalChatting.getCooldownManager().isCooldown(player.getUniqueId())) {
-            sender.sendMessage(Common.color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chatting again!")));
-            return;
-        }
-
-        if (GlobalChatting.getConfigManager().isMuted() && !sender.hasPermission("globalchatting.bypass-muted")) {
-            sender.sendMessage(Common.color(new TextComponent("&cGlobalChatting is currently muted!")));
+            sender.sendMessage(Common.color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chat again!")));
             return;
         }
 

@@ -3,6 +3,7 @@ package dev.rajaopak.globalchatting.manager;
 import dev.rajaopak.globalchatting.GlobalChatting;
 import dev.rajaopak.globalchatting.util.Common;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -13,6 +14,12 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class GlobalChatManager {
+
+    public static void sendConsoleGlobalChat(CommandSender sender, String message) {
+        String format = GlobalChatting.getConfigManager().getConfiguration().getString("console.format");
+        ProxyServer.getInstance().getPlayers().forEach(proxiedPlayer -> proxiedPlayer.sendMessage(Common.translateHexColor(formatPlaceholder(sender, format, message))));
+        Common.log(Common.translateHexColor(formatPlaceholder(sender, format, message)));
+    }
 
     public static void sendPlayerGlobalChat(ProxiedPlayer player, String message) {
         HashMap<Integer, String> priorityList = new HashMap<>();
@@ -57,28 +64,36 @@ public class GlobalChatManager {
             String finalFormat1 = finalFormat;
             if (finalUseHexColor) {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat1), Common.translateHexColor(message))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(message)).getText());
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(message)));
             } else {
-                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat1), message)));
+                ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat1), Common.color(message))));
                 Common.log(Common.color(new TextComponent(formatPlaceholder(player, finalFormat, message))).getText());
             }
         } else {
             String finalFormat2 = finalFormat;
             if (finalUseHexColor) {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat2), Common.translateHexColor(ChatColor.stripColor(message)))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(ChatColor.stripColor(message))).getText());
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), Common.translateHexColor(ChatColor.stripColor(message))));
             } else {
                 ProxyServer.getInstance().getPlayers().forEach(t -> t.sendMessage(formatPlaceholder(player, Common.translateHexColor(finalFormat2), ChatColor.stripColor(message))));
-                Common.log(formatPlaceholder(player, Common.color(finalFormat), ChatColor.stripColor(message)).getText());
+                Common.log(formatPlaceholder(player, Common.color(finalFormat), ChatColor.stripColor(message)));
             }
         }
     }
 
-    public static TextComponent formatPlaceholder(ProxiedPlayer player, String format, String message) {
-        return new TextComponent(format.replace("{player}", player.getName()).replace("{message}", message)
-                .replace("{server}", player.getServer().getInfo().getName())
-                .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
-                .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now())));
+    public static String formatPlaceholder(CommandSender sender, String format, String message) {
+        if (sender instanceof ProxiedPlayer) {
+            ProxiedPlayer player = (ProxiedPlayer) sender;
+            return format.replace("{player}", player.getName()).replace("{message}", message)
+                    .replace("{server}", player.getServer().getInfo().getName())
+                    .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
+                    .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
+        } else {
+            return format.replace("{player}", GlobalChatting.getConfigManager().getConfiguration().getString("console.name")).replace("{message}", message)
+                    .replace("{server}", GlobalChatting.getConfigManager().getConfiguration().getString("console.server"))
+                    .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
+                    .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
+        }
     }
 
 }

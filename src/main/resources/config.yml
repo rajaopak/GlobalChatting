@@ -12,6 +12,19 @@ cooldown-on-first-login: true
 #cooldown time for player when they first time played on the server.
 first-login-cooldown: 300
 
+console:
+  #this settings will set the {player} placeholder.
+  #placeholder: {player}, {message}, {server}, {time}, {date}.
+  name: "CONSOLE"
+
+  #this settings will set the {server} placeholder.
+  #placeholder: {player}, {message}, {server}, {time}, {date}.
+  server: "Proxy"
+
+  #this is the format of the message that will be sent to the global chat.
+  #placeholder: {player}, {message}, {server}, {time}, {date}.
+  format: "&8[&7{date}, {time}&8] &8[&aGlobal&8] &8[&e{server}&8] &r{player}&7: &r{message}"
+
 globalchat:
   default:
 
