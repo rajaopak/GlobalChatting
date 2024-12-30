@@ -16,6 +16,7 @@ import dev.rajaopak.globalchatting.velocity.config.ConfigManager;
 import dev.rajaopak.globalchatting.velocity.hooks.HookManager;
 import dev.rajaopak.globalchatting.velocity.listener.LuckPermsListener;
 import dev.rajaopak.globalchatting.velocity.manager.CooldownManager;
+import dev.rajaopak.globalchatting.velocity.manager.ServerGroupManager;
 import dev.rajaopak.globalchatting.velocity.metrics.Metrics;
 
 import java.nio.file.Path;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
 
 @Plugin(id = "globalchatting",
         name = "GlobalChatting",
-        version = "0.8",
+        version = "0.9",
         description = "Plugin For Chatting In BungeeCord",
         authors = {"rajaopak"},
         dependencies = {
@@ -43,6 +44,7 @@ public class GlobalChattingVelocity {
     // Manager
     private ConfigManager configManager;
     private CooldownManager cooldownManager;
+    private ServerGroupManager serverGroupManager;
 
     @Inject
     public GlobalChattingVelocity(ProxyServer proxy, Logger logger, Metrics.Factory metricsFactory, @DataDirectory Path dataDirectory) {
@@ -61,6 +63,7 @@ public class GlobalChattingVelocity {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         configManager = new ConfigManager(this);
         cooldownManager = new CooldownManager();
+        serverGroupManager = new ServerGroupManager(this);
 
         if (HookManager.isLuckPermsEnable()) {
             new LuckPermsListener(this);
@@ -107,5 +110,9 @@ public class GlobalChattingVelocity {
 
     public CooldownManager getCooldownManager() {
         return cooldownManager;
+    }
+
+    public ServerGroupManager getServerGroupManager() {
+        return serverGroupManager;
     }
 }

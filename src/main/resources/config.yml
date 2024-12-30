@@ -22,13 +22,28 @@ blacklist-server:
 # message that will send to player when try to use global chat from blacklisted server
 blacklist-server-message: "&cYou can't use global chat in this server!"
 
+# group your server so when the server name is called, it will return the group name.
+# this feature will replace {server} placeholder and replace it with group name,
+# also this feature only for player format, not console format.
+#
+# e.g.
+# server-groups:
+#   <group_name>:
+#     - <server_here>
+#     - <another_server>
+server-groups:
+  example:
+    - your-server-here
+    - server-to-group
+  test:
+    - server1
+    - server2
+
 console:
   # this settings will set the {player} placeholder.
-  # placeholder: {player}, {message}, {server}, {time}, {date}.
   name: "CONSOLE"
 
   # this settings will set the {server} placeholder.
-  # placeholder: {player}, {message}, {server}, {time}, {date}.
   server: "Proxy"
 
   # this is the format of the message that will be sent to the global chat.

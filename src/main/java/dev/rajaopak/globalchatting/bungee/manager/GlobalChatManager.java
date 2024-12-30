@@ -102,7 +102,7 @@ public class GlobalChatManager {
         if (sender instanceof ProxiedPlayer player) {
             return format.replace("{player}", player.getName())
                     .replace("{message}", message)
-                    .replace("{server}", player.getServer().getInfo().getName())
+                    .replace("{server}", GlobalChattingBungee.getServerGroupManager().getServerGroup(player.getServer().getInfo().getName()))
                     .replace("{luckperms_prefix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix() : "")
                     .replace("{luckperms_suffix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix() : "")
                     .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))

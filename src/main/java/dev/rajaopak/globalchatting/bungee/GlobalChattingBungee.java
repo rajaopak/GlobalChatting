@@ -7,6 +7,7 @@ import dev.rajaopak.globalchatting.bungee.config.ConfigManager;
 import dev.rajaopak.globalchatting.bungee.hooks.HookManager;
 import dev.rajaopak.globalchatting.bungee.listener.LuckPermsListener;
 import dev.rajaopak.globalchatting.bungee.manager.CooldownManager;
+import dev.rajaopak.globalchatting.bungee.manager.ServerGroupManager;
 import dev.rajaopak.globalchatting.bungee.metrics.Metrics;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -14,6 +15,7 @@ public final class GlobalChattingBungee extends Plugin {
 
     private static ConfigManager configManager;
     private static CooldownManager cooldownManager;
+    private static ServerGroupManager serverGroupManager;
 
     public static ConfigManager getConfigManager() {
         return configManager;
@@ -23,11 +25,16 @@ public final class GlobalChattingBungee extends Plugin {
         return cooldownManager;
     }
 
+    public static ServerGroupManager getServerGroupManager() {
+        return serverGroupManager;
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
         configManager = new ConfigManager(this);
         cooldownManager = new CooldownManager();
+        serverGroupManager = new ServerGroupManager();
 
         if (HookManager.isLuckPermsEnable()) {
             new LuckPermsListener(this);

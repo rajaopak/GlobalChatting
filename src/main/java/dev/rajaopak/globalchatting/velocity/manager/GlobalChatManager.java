@@ -105,7 +105,7 @@ public class GlobalChatManager {
     private static Component formatPlaceholder(CommandSource sender, String format, Component message) {
         if (sender instanceof Player player) {
             return Common.translate(format.replace("{player}", player.getUsername())
-                            .replace("{server}", player.getCurrentServer().orElseThrow().getServer().getServerInfo().getName())
+                            .replace("{server}", GlobalChattingVelocity.getPlugin().getServerGroupManager().getServerGroup(player.getCurrentServer().orElseThrow().getServer().getServerInfo().getName()))
                             .replace("{luckperms_prefix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix() : "")
                             .replace("{luckperms_suffix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix() : "")
                             .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
