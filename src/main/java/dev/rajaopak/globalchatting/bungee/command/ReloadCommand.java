@@ -1,7 +1,7 @@
-package dev.rajaopak.globalchatting.command;
+package dev.rajaopak.globalchatting.bungee.command;
 
-import dev.rajaopak.globalchatting.GlobalChatting;
-import dev.rajaopak.globalchatting.util.Common;
+import dev.rajaopak.globalchatting.bungee.GlobalChattingBungee;
+import dev.rajaopak.globalchatting.bungee.util.Common;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
@@ -20,8 +20,8 @@ public class ReloadCommand extends Command {
         }
 
         if (args.length == 0) {
-            sender.sendMessage(Common.color(new TextComponent("&cReloading the configuration...")));
-            GlobalChatting.getConfigManager().reloadConfig();
+            sender.sendMessage(Common.color(new TextComponent("&eReloading the configuration...")));
+            GlobalChattingBungee.getConfigManager().reloadConfig();
             sender.sendMessage(Common.color(new TextComponent("&aConfiguration reloaded!")));
         } else {
             sender.sendMessage(Common.color(new TextComponent("&cUsage: /globalchattingreload")));

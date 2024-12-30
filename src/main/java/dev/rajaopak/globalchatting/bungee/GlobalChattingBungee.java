@@ -1,19 +1,27 @@
-package dev.rajaopak.globalchatting;
+package dev.rajaopak.globalchatting.bungee;
 
-import dev.rajaopak.globalchatting.command.GlobalChatMuteCommand;
-import dev.rajaopak.globalchatting.command.GlobalChattingCommand;
-import dev.rajaopak.globalchatting.command.ReloadCommand;
-import dev.rajaopak.globalchatting.config.ConfigManager;
-import dev.rajaopak.globalchatting.hooks.HookManager;
-import dev.rajaopak.globalchatting.listener.LuckPermsListener;
-import dev.rajaopak.globalchatting.manager.CooldownManager;
-import dev.rajaopak.globalchatting.metrics.Metrics;
+import dev.rajaopak.globalchatting.bungee.command.GlobalChatMuteCommand;
+import dev.rajaopak.globalchatting.bungee.command.GlobalChattingCommand;
+import dev.rajaopak.globalchatting.bungee.command.ReloadCommand;
+import dev.rajaopak.globalchatting.bungee.config.ConfigManager;
+import dev.rajaopak.globalchatting.bungee.hooks.HookManager;
+import dev.rajaopak.globalchatting.bungee.listener.LuckPermsListener;
+import dev.rajaopak.globalchatting.bungee.manager.CooldownManager;
+import dev.rajaopak.globalchatting.bungee.metrics.Metrics;
 import net.md_5.bungee.api.plugin.Plugin;
 
-public final class GlobalChatting extends Plugin {
+public final class GlobalChattingBungee extends Plugin {
 
     private static ConfigManager configManager;
     private static CooldownManager cooldownManager;
+
+    public static ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public static CooldownManager getCooldownManager() {
+        return cooldownManager;
+    }
 
     @Override
     public void onEnable() {
@@ -36,13 +44,5 @@ public final class GlobalChatting extends Plugin {
     public void onDisable() {
         // Plugin shutdown logic
         getCooldownManager().clearCooldowns();
-    }
-
-    public static ConfigManager getConfigManager() {
-        return configManager;
-    }
-
-    public static CooldownManager getCooldownManager() {
-        return cooldownManager;
     }
 }

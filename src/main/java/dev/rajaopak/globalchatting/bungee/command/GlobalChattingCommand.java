@@ -1,9 +1,9 @@
-package dev.rajaopak.globalchatting.command;
+package dev.rajaopak.globalchatting.bungee.command;
 
-import dev.rajaopak.globalchatting.GlobalChatting;
-import dev.rajaopak.globalchatting.hooks.HookManager;
-import dev.rajaopak.globalchatting.manager.GlobalChatManager;
-import dev.rajaopak.globalchatting.util.Common;
+import dev.rajaopak.globalchatting.bungee.GlobalChattingBungee;
+import dev.rajaopak.globalchatting.bungee.hooks.HookManager;
+import dev.rajaopak.globalchatting.bungee.manager.GlobalChatManager;
+import dev.rajaopak.globalchatting.bungee.util.Common;
 import litebans.api.Database;
 import me.leoko.advancedban.manager.PunishmentManager;
 import net.md_5.bungee.api.CommandSender;
@@ -41,7 +41,7 @@ public class GlobalChattingCommand extends Command {
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (GlobalChatting.getConfigManager().isMuted() && !sender.hasPermission("globalchatting.bypass-muted")) {
+        if (GlobalChattingBungee.getConfigManager().isMuted() && !sender.hasPermission("globalchatting.bypass-muted")) {
             sender.sendMessage(Common.color(new TextComponent("&cGlobal Chat is currently muted!")));
             return;
         }
@@ -56,8 +56,13 @@ public class GlobalChattingCommand extends Command {
             return;
         }
 
-        if (GlobalChatting.getCooldownManager().isCooldown(player.getUniqueId())) {
-            sender.sendMessage(Common.color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChatting.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chat again!")));
+        if (GlobalChattingBungee.getCooldownManager().isCooldown(player.getUniqueId())) {
+            sender.sendMessage(Common.color(new TextComponent("&cYou need to wait " + Common.formatTime((int) GlobalChattingBungee.getCooldownManager().getCooldown(player.getUniqueId())) + " before using Global Chat again!")));
+            return;
+        }
+
+        if (GlobalChattingBungee.getConfigManager().getConfiguration().getStringList("blacklist-server").contains(player.getServer().getInfo().getName())) {
+            sender.sendMessage(Common.color(new TextComponent(GlobalChattingBungee.getConfigManager().getConfiguration().getString("blacklist-server-message"))));
             return;
         }
 
@@ -82,6 +87,6 @@ public class GlobalChattingCommand extends Command {
 
     public void sendHelp(CommandSender sender) {
         sender.sendMessage(Common.color(new TextComponent("&cUsage: /globalchatting <message>")));
-        sender.sendMessage(Common.color(new TextComponent("&6Aliases: /gc, /globalchat, /gchat")));
+        sender.sendMessage(Common.color(new TextComponent("&6Aliases: /gc, /gchat, /globalchat")));
     }
 }

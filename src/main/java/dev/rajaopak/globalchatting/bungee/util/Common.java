@@ -1,4 +1,4 @@
-package dev.rajaopak.globalchatting.util;
+package dev.rajaopak.globalchatting.bungee.util;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 public class Common {
 
     public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-fA-F])");
-    public static final char COLOR_CHAR = '\u00A7';
 
     public static String translateHexColor(String string) {
         Matcher matcher = HEX_PATTERN.matcher(string);

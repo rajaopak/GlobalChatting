@@ -1,6 +1,6 @@
 name: GlobalChatting
 version: '${version}'
-main: dev.rajaopak.globalchatting.GlobalChatting
+main: dev.rajaopak.globalchatting.bungee.GlobalChattingBungee
 description: Plugin For Chatting In BungeeCord
 author: rajaopak
 softDepends: [LiteBans, AdvancedBan, LuckPerms]

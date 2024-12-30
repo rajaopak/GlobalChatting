@@ -1,13 +1,13 @@
-package dev.rajaopak.globalchatting.manager;
+package dev.rajaopak.globalchatting.velocity.manager;
 
-import net.md_5.bungee.api.ProxyServer;
+import dev.rajaopak.globalchatting.velocity.GlobalChattingVelocity;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 public class CooldownManager {
 
-    HashMap<UUID, Long> cooldowns;
+    private final HashMap<UUID, Long> cooldowns;
 
     public CooldownManager() {
         cooldowns = new HashMap<>();
@@ -25,7 +25,7 @@ public class CooldownManager {
     }
 
     public boolean isCooldown(UUID uuid) {
-        if (!ProxyServer.getInstance().getPlayer(uuid).hasPermission("globalchatting.bypass-cooldown")) {
+        if (!GlobalChattingVelocity.getPlugin().getProxy().getPlayer(uuid).get().hasPermission("globalchatting.bypass-cooldown")) {
             if (cooldowns.containsKey(uuid)) {
                 if (cooldowns.get(uuid) > System.currentTimeMillis()) {
                     return true;

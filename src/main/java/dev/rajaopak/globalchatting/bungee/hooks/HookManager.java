@@ -1,4 +1,4 @@
-package dev.rajaopak.globalchatting.hooks;
+package dev.rajaopak.globalchatting.bungee.hooks;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;

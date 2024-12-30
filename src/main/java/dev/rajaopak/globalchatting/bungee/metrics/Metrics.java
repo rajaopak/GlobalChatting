@@ -1,4 +1,4 @@
-package dev.rajaopak.globalchatting.metrics;
+package dev.rajaopak.globalchatting.bungee.metrics;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
