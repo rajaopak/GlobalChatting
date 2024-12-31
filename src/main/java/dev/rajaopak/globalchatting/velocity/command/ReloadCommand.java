@@ -18,15 +18,11 @@ public class ReloadCommand {
                 .executes(context -> {
 
                     context.getSource().sendMessage(Component.text("Reloading the configuration...", NamedTextColor.YELLOW));
-                    try {
-                        GlobalChattingVelocity.getPlugin().getConfigManager().reloadConfig();
-                    } catch (IOException e) {
-                        plugin.getLogger().severe("Cannot reload the Config! There might be a problem with the config file.");
-                        throw new RuntimeException(e);
+                    if(!GlobalChattingVelocity.getPlugin().reloadConfigs()) {
+                        context.getSource().sendMessage(Component.text("Failed to reload the config.", NamedTextColor.RED));
+                        return Command.SINGLE_SUCCESS;
                     }
-                    context.getSource().sendMessage(Component.text("Failed to reload the config", NamedTextColor.YELLOW));
-                    context.getSource().sendMessage(Component.text("Reloading the configuration...", NamedTextColor.GREEN));
-
+                    context.getSource().sendMessage(Component.text("Configuration reloaded!", NamedTextColor.GREEN));
                     return Command.SINGLE_SUCCESS;
                 })
                 .build();

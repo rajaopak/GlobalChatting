@@ -20,6 +20,8 @@ public class ServerGroupManager {
     }
 
     private void loadServerGroups() {
+        if (this.core.getConfigManager().getConfiguration().getSection("server-groups") == null) return;
+
         this.core.getConfigManager().getConfiguration().getSection("server-groups").getKeys().stream().map(Objects::toString).forEach(key -> {
             if (!isGroupExists(key)) {
                 serverGroups.put(key, this.core.getConfigManager().getConfiguration().getStringList("server-groups." + key));
@@ -38,6 +40,11 @@ public class ServerGroupManager {
 
     public boolean isGroupExists(String group) {
         return this.serverGroups.containsKey(group);
+    }
+
+    public void reload() {
+        close();
+        loadServerGroups();
     }
 
     public void close() {

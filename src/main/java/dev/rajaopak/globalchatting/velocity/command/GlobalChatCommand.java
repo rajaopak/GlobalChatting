@@ -59,7 +59,8 @@ public class GlobalChatCommand {
                                 return Command.SINGLE_SUCCESS;
                             }
 
-                            if (plugin.getConfigManager().getConfiguration().getStringList("blacklist-server").contains(player.getCurrentServer().orElseThrow().getServer().getServerInfo().getName())) {
+                            if (plugin.getConfigManager().getConfiguration().getStringList("blacklist-server").contains(player.getCurrentServer().orElseThrow().getServer().getServerInfo().getName()) &&
+                            !player.hasPermission("globalchatting.bypass")) {
                                 player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(plugin.getConfigManager().getConfiguration().getString("blacklist-server-message")));
                                 return Command.SINGLE_SUCCESS;
                             }

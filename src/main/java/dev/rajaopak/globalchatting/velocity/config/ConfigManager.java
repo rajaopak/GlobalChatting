@@ -1,6 +1,7 @@
 package dev.rajaopak.globalchatting.velocity.config;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
 import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
 import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
 import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
@@ -36,7 +37,13 @@ public class ConfigManager {
                     LoaderSettings.builder().setAutoUpdate(true).build(),
                     DumperSettings.DEFAULT,
                     /*UpdaterSettings.builder().setOptionSorting(UpdaterSettings.OptionSorting.SORT_BY_DEFAULTS).build()*/
-                    UpdaterSettings.builder().setKeepAll(true).setOptionSorting(UpdaterSettings.OptionSorting.SORT_BY_DEFAULTS).build());
+                    UpdaterSettings.builder()
+                            .setVersioning(new BasicVersioning("config-version"))
+                            .addIgnoredRoute("1", "server-groups", '.')
+                            .addIgnoredRoute("1", "globalchat", '.')
+                            .addIgnoredRoute("1", "blacklist-server", '.')
+                            .setKeepAll(true)
+                            .setOptionSorting(UpdaterSettings.OptionSorting.SORT_BY_DEFAULTS).build());
 
             configuration.update();
             configuration.save();

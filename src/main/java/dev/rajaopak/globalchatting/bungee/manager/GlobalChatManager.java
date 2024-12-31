@@ -103,8 +103,8 @@ public class GlobalChatManager {
             return format.replace("{player}", player.getName())
                     .replace("{message}", message)
                     .replace("{server}", GlobalChattingBungee.getServerGroupManager().getServerGroup(player.getServer().getInfo().getName()))
-                    .replace("{luckperms_prefix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix() : "")
-                    .replace("{luckperms_suffix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix() : "")
+                    .replace("{luckperms_prefix}", getPlayerPrefix(player))
+                    .replace("{luckperms_suffix}", getPlayerSuffix(player))
                     .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
                     .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
         } else {
@@ -114,6 +114,18 @@ public class GlobalChatManager {
                     .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
                     .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
         }
+    }
+
+    private static String getPlayerPrefix(ProxiedPlayer player) {
+        if (!HookManager.isLuckPermsEnable()) return "";
+        String prefix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
+        return prefix == null ? "" : prefix;
+    }
+
+    private static String getPlayerSuffix(ProxiedPlayer player) {
+        if (!HookManager.isLuckPermsEnable()) return "";
+        String suffix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
+        return suffix == null ? "" : suffix;
     }
 
 }

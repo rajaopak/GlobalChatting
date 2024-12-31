@@ -106,8 +106,8 @@ public class GlobalChatManager {
         if (sender instanceof Player player) {
             return Common.translate(format.replace("{player}", player.getUsername())
                             .replace("{server}", GlobalChattingVelocity.getPlugin().getServerGroupManager().getServerGroup(player.getCurrentServer().orElseThrow().getServer().getServerInfo().getName()))
-                            .replace("{luckperms_prefix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix() : "")
-                            .replace("{luckperms_suffix}", HookManager.isLuckPermsEnable() ? LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix() : "")
+                            .replace("{luckperms_prefix}", getPlayerPrefix(player))
+                            .replace("{luckperms_suffix}", getPlayerSuffix(player))
                             .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
                             .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now())))
                     .replaceText(TextReplacementConfig.builder().matchLiteral("{message}").replacement(message).build());
@@ -118,6 +118,18 @@ public class GlobalChatManager {
                             .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now())))
                     .replaceText(TextReplacementConfig.builder().matchLiteral("{message}").replacement(message).build());
         }
+    }
+
+    private static String getPlayerPrefix(Player player) {
+        if (!HookManager.isLuckPermsEnable()) return "";
+        String prefix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
+        return prefix == null ? "" : prefix;
+    }
+
+    private static String getPlayerSuffix(Player player) {
+        if (!HookManager.isLuckPermsEnable()) return "";
+        String suffix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
+        return suffix == null ? "" : suffix;
     }
 
 }

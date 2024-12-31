@@ -61,7 +61,8 @@ public class GlobalChattingCommand extends Command {
             return;
         }
 
-        if (GlobalChattingBungee.getConfigManager().getConfiguration().getStringList("blacklist-server").contains(player.getServer().getInfo().getName())) {
+        if (GlobalChattingBungee.getConfigManager().getConfiguration().getStringList("blacklist-server").contains(player.getServer().getInfo().getName()) &&
+        !sender.hasPermission("globalchatting.bypass")) {
             sender.sendMessage(Common.color(new TextComponent(GlobalChattingBungee.getConfigManager().getConfiguration().getString("blacklist-server-message"))));
             return;
         }

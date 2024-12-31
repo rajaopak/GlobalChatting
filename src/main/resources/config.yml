@@ -1,5 +1,8 @@
 # GlobalChatting Configuration.
 
+# DO NOT TOUCH THIS, UNLESS YOU KNOW WHAT YOU DO!
+config-version: 1
+
 # mute the global chat so no one can talk. (only the player that has the permission can talk)
 # Permission to bypass mute: globalchatting.bypass-muted
 is-muted: false
@@ -32,12 +35,6 @@ blacklist-server-message: "&cYou can't use global chat in this server!"
 #     - <server_here>
 #     - <another_server>
 server-groups:
-  example:
-    - your-server-here
-    - server-to-group
-  test:
-    - server1
-    - server2
 
 console:
   # this settings will set the {player} placeholder.

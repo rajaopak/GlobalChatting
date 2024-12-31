@@ -19,12 +19,13 @@ import dev.rajaopak.globalchatting.velocity.manager.CooldownManager;
 import dev.rajaopak.globalchatting.velocity.manager.ServerGroupManager;
 import dev.rajaopak.globalchatting.velocity.metrics.Metrics;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
 @Plugin(id = "globalchatting",
         name = "GlobalChatting",
-        version = "0.9",
+        version = "1.0",
         description = "Plugin For Chatting In BungeeCord",
         authors = {"rajaopak"},
         dependencies = {
@@ -90,6 +91,18 @@ public class GlobalChattingVelocity {
         commandManager.register(gcReloadMeta, ReloadCommand.reloadCommand(this));
 
         metricsFactory.make(this, 15432);
+    }
+
+    public boolean reloadConfigs() {
+        try {
+            GlobalChattingVelocity.getPlugin().getConfigManager().reloadConfig();
+            getServerGroupManager().reload();
+            return true;
+        } catch (IOException e) {
+            plugin.getLogger().severe("Cannot reload the Config! There might be a problem with the config file.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public Logger getLogger() {

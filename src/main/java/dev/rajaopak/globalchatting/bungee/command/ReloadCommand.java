@@ -21,8 +21,11 @@ public class ReloadCommand extends Command {
 
         if (args.length == 0) {
             sender.sendMessage(Common.color(new TextComponent("&eReloading the configuration...")));
-            GlobalChattingBungee.getConfigManager().reloadConfig();
-            sender.sendMessage(Common.color(new TextComponent("&aConfiguration reloaded!")));
+            if (GlobalChattingBungee.reloadConfigs()) {
+                sender.sendMessage(Common.color(new TextComponent("&aConfiguration reloaded!")));
+            } else {
+                sender.sendMessage(Common.color(new TextComponent("&cFailed to reload the config.")));
+            }
         } else {
             sender.sendMessage(Common.color(new TextComponent("&cUsage: /globalchattingreload")));
             sender.sendMessage(Common.color(new TextComponent("&6Aliases: /gcreload, /gchatreload")));

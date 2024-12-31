@@ -29,6 +29,14 @@ public final class GlobalChattingBungee extends Plugin {
         return serverGroupManager;
     }
 
+    public static boolean reloadConfigs() {
+        if (getConfigManager().reloadConfig()) {
+            getServerGroupManager().reload();
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
