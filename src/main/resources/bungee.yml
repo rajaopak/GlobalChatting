@@ -3,4 +3,4 @@ version: '${version}'
 main: dev.rajaopak.globalchatting.bungee.GlobalChattingBungee
 description: Plugin For Chatting In BungeeCord
 author: rajaopak
-softDepends: [LiteBans, AdvancedBan, LuckPerms]
+softDepends: [LiteBans, AdvancedBan, LuckPerms, PremiumVanish]

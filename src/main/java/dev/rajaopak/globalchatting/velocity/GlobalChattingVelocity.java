@@ -25,13 +25,14 @@ import java.util.logging.Logger;
 
 @Plugin(id = "globalchatting",
         name = "GlobalChatting",
-        version = "1.0",
+        version = "1.1",
         description = "Plugin For Chatting In BungeeCord",
         authors = {"rajaopak"},
         dependencies = {
                 @Dependency(id = "litebans", optional = true),
                 @Dependency(id = "advancedban", optional = true),
-                @Dependency(id = "luckperms", optional = true)
+                @Dependency(id = "luckperms", optional = true),
+                @Dependency(id = "premiumvanish", optional = true)
         })
 public class GlobalChattingVelocity {
 
