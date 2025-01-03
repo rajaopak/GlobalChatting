@@ -3,7 +3,6 @@ package dev.rajaopak.globalchatting.bungee.manager;
 import dev.rajaopak.globalchatting.bungee.GlobalChattingBungee;
 import dev.rajaopak.globalchatting.bungee.hooks.HookManager;
 import dev.rajaopak.globalchatting.bungee.util.Common;
-import net.luckperms.api.LuckPermsProvider;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -117,14 +116,14 @@ public class GlobalChatManager {
     }
 
     private static String getPlayerPrefix(ProxiedPlayer player) {
-        if (!HookManager.isLuckPermsEnable()) return "";
-        String prefix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
+        if (!HookManager.isLuckPermsEnabled()) return "";
+        String prefix = HookManager.getLuckperms().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
         return prefix == null ? "" : prefix;
     }
 
     private static String getPlayerSuffix(ProxiedPlayer player) {
-        if (!HookManager.isLuckPermsEnable()) return "";
-        String suffix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
+        if (!HookManager.isLuckPermsEnabled()) return "";
+        String suffix = HookManager.getLuckperms().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
         return suffix == null ? "" : suffix;
     }
 

@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 @Plugin(id = "globalchatting",
         name = "GlobalChatting",
-        version = "1.1",
+        version = "1.2",
         description = "Plugin For Chatting In BungeeCord",
         authors = {"rajaopak"},
         dependencies = {
@@ -67,7 +67,7 @@ public class GlobalChattingVelocity {
         cooldownManager = new CooldownManager();
         serverGroupManager = new ServerGroupManager(this);
 
-        if (HookManager.isLuckPermsEnable()) {
+        if (HookManager.isLuckPermsEnabled()) {
             new LuckPermsListener(this);
         }
 

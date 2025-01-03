@@ -9,7 +9,6 @@ import dev.rajaopak.globalchatting.velocity.util.Common;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import net.luckperms.api.LuckPermsProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDateTime;
@@ -121,14 +120,14 @@ public class GlobalChatManager {
     }
 
     private static String getPlayerPrefix(Player player) {
-        if (!HookManager.isLuckPermsEnable()) return "";
-        String prefix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
+        if (!HookManager.isLuckPermsEnabled()) return "";
+        String prefix = HookManager.getLuckperms().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
         return prefix == null ? "" : prefix;
     }
 
     private static String getPlayerSuffix(Player player) {
-        if (!HookManager.isLuckPermsEnable()) return "";
-        String suffix = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
+        if (!HookManager.isLuckPermsEnabled()) return "";
+        String suffix = HookManager.getLuckperms().getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getSuffix();
         return suffix == null ? "" : suffix;
     }
 

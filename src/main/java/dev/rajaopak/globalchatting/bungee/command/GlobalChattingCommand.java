@@ -46,12 +46,12 @@ public class GlobalChattingCommand extends Command {
             return;
         }
 
-        if (HookManager.isLiteBansEnable() && Database.get().isPlayerMuted(player.getUniqueId(), player.getAddress().getHostName())) {
+        if (HookManager.isLiteBansEnabled() && Database.get().isPlayerMuted(player.getUniqueId(), player.getAddress().getHostName())) {
             sender.sendMessage(Common.color(new TextComponent("&cYou are currently muted!")));
             return;
         }
 
-        if (HookManager.isAdvancedBanEnable() && PunishmentManager.get().isMuted(player.getUniqueId().toString().replace("-", ""))) {
+        if (HookManager.isAdvancedBanEnabled() && PunishmentManager.get().isMuted(player.getUniqueId().toString().replace("-", ""))) {
             sender.sendMessage(Common.color(new TextComponent("&cYou are currently muted!")));
             return;
         }

@@ -44,12 +44,12 @@ public class GlobalChatCommand {
                                 return Command.SINGLE_SUCCESS;
                             }
 
-                            if (HookManager.isLiteBansEnable() && Database.get().isPlayerMuted(player.getUniqueId(), player.getRemoteAddress().getHostName())) {
+                            if (HookManager.isLiteBansEnabled() && Database.get().isPlayerMuted(player.getUniqueId(), player.getRemoteAddress().getHostName())) {
                                 player.sendMessage(Component.text("You are currently muted!", NamedTextColor.RED));
                                 return Command.SINGLE_SUCCESS;
                             }
 
-                            if (HookManager.isAdvancedBanEnable() && PunishmentManager.get().isMuted(player.getUniqueId().toString())) {
+                            if (HookManager.isAdvancedBanEnabled() && PunishmentManager.get().isMuted(player.getUniqueId().toString())) {
                                 player.sendMessage(Component.text("You are currently muted!", NamedTextColor.RED));
                                 return Command.SINGLE_SUCCESS;
                             }

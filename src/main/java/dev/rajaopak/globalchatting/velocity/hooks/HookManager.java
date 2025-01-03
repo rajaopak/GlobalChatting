@@ -6,20 +6,24 @@ import net.luckperms.api.LuckPermsProvider;
 
 public class HookManager {
 
-    public static boolean isLiteBansEnable() {
-        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("LiteBans").isPresent();
+    public static boolean isLiteBansEnabled() {
+        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("litebans").isPresent();
     }
 
-    public static boolean isAdvancedBanEnable() {
-        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("AdvancedBan").isPresent();
+    public static boolean isAdvancedBanEnabled() {
+        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("advancedban").isPresent();
     }
 
-    public static boolean isLuckPermsEnable() {
-        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("LuckPerms").isPresent();
+    public static boolean isLuckPermsEnabled() {
+        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("luckperms").isPresent();
+    }
+
+    public static boolean isPremiumVanishEnabled() {
+        return GlobalChattingVelocity.getPlugin().getProxy().getPluginManager().getPlugin("premiumvanish").isPresent();
     }
 
     public static LuckPerms getLuckperms() {
-        if (isLuckPermsEnable()) {
+        if (isLuckPermsEnabled()) {
             return LuckPermsProvider.get();
         }
 

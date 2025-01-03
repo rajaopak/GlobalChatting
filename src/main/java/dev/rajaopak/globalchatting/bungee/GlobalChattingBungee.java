@@ -44,7 +44,7 @@ public final class GlobalChattingBungee extends Plugin {
         cooldownManager = new CooldownManager();
         serverGroupManager = new ServerGroupManager();
 
-        if (HookManager.isLuckPermsEnable()) {
+        if (HookManager.isLuckPermsEnabled()) {
             new LuckPermsListener(this);
         }
 
