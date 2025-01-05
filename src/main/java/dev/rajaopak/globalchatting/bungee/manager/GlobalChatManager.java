@@ -102,8 +102,8 @@ public class GlobalChatManager {
             return format.replace("{player}", player.getName())
                     .replace("{message}", message)
                     .replace("{server}", GlobalChattingBungee.getServerGroupManager().getServerGroup(player.getServer().getInfo().getName()))
-                    .replace("{luckperms_prefix}", getPlayerPrefix(player))
-                    .replace("{luckperms_suffix}", getPlayerSuffix(player))
+                    .replace("{luckperms_prefix}", Common.color(getPlayerPrefix(player)))
+                    .replace("{luckperms_suffix}", Common.color(getPlayerSuffix(player)))
                     .replace("{time}", DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()))
                     .replace("{date}", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now()));
         } else {

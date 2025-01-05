@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 @Plugin(id = "globalchatting",
         name = "GlobalChatting",
-        version = "1.2",
+        version = "1.3",
         description = "Plugin For Chatting In BungeeCord",
         authors = {"rajaopak"},
         dependencies = {
